@@ -53,10 +53,10 @@ const connection = require("./database/db");
 /*****************************************
  * 9-ESTABLECIENDO LAS RUTAS(estan dentro de la carpeta public que defini en el paso 4)
  *****************************************/
-app.get("/", (req, res) => {
-  res.render("index", { msg: "Alejandro" });
+/* app.get("/", (req, res) => {
+  res.render("index");
 });
-
+ */
 app.get("/login", (req, res) => {
   res.render("login");
 });
@@ -93,13 +93,94 @@ app.post("/register", async (req, res) => {
           alertMessage: "!Successful Registration¡",
           alertIcon: "success",
           showConfirmButton: false,
-          time: 1500,
+          timer: 1500,
           ruta: "",
         });
       }
     }
   );
 });
+
+/*****************************************
+ * 11-AUTENTICACIÓN
+ *****************************************/
+app.post("/auth", async (req, res) => {
+  const user = req.body.nameUser;
+  const pass = req.body.namePassword;
+  //let passwordHash = await bcryptjs.hash(pass, 8); //no hace falta
+  if (user && pass) {
+    connection.query(
+      "SELECT * FROM users WHERE user = ?",
+      [user],
+      async (error, results) => {
+        console.log(results[0]);
+        if (
+          results.length == 0 ||
+          !(await bcryptjs.compare(pass, results[0].pass))
+        ) {
+          res.render("login", {
+            alert: true,
+            alertTitle: "Error",
+            alertMessage: "Usuario y/o password incorrectas",
+            alertIcon: "error",
+            showConfirmButton: true,
+            timer: "",
+            ruta: "login",
+          });
+        } else {
+          req.session.loggedin = true;
+          req.session.name = results[0].name;
+          res.render("login", {
+            alert: true,
+            alertTitle: "!!Conexión exitosa¡¡",
+            alertMessage: "Usuario logueado",
+            alertIcon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+            ruta: "",
+          });
+        }
+      }
+    );
+  } else {
+    res.render("login", {
+      alert: true,
+      alertTitle: "Error",
+      alertMessage: "Por favor Ingrese un usuario y/o una password",
+      alertIcon: "warning",
+      showConfirmButton: true,
+      timer: "",
+      ruta: "login",
+    });
+  }
+});
+
+/*****************************************
+ * 12-AUTH PAGES
+ *****************************************/
+app.get("/", (req, res) => {
+  if (req.session.loggedin) {
+    res.render("index", {
+      login: true,
+      name: req.session.name, //OJO el name es de la varibale session q lo trae de la base de datos desde arriba "11-AUTENTICACIÓN"   req.session.name = results[0].name;
+    });
+  } else {
+    res.render("index", {
+      login: false,
+      name: "you must log in",
+    });
+  }
+});
+
+/*****************************************
+ * 13-LOGOUT
+ *****************************************/
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+});
+
 /*****************************************
  * SERVIDOR
  *****************************************/

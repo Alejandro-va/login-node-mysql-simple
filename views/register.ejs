@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Registro</title>
   <link rel="stylesheet" href="./resource/css/styles.css">
 </head>
 
 <body>
   <div class="register-form">
-    <h1>Formulario de registro</h1>
+    <h1>Registration Form</h1>
     <form action="register" method="POST">
       <label for="userName">User</label>
       <input type="text" name="userName" required>
@@ -28,7 +28,7 @@
       <label for="passName">Password</label>
       <input type="password" name="passName" required>
 
-      <div style="display: inline;">
+      <div id="contenedor-btn-reg">
         <input type="submit" class="btn-save" value="Save">
         <a href="/" class="btn-cancel">Cancel</a>
       </div>
@@ -43,10 +43,10 @@
         text: '<%= alertMessage %>',
         icon: '<%= alertIcon %>',
         showConfirmButton: '<%= showConfirmButton %>',
-        timer: <%= time %>
+        timer: "<%= timer %>"/* para q el tiempo funcione si mando false tengo q kitar las comillas y dejarlo asi <%= timer %> */
       }).then(() => {
-          window.location = '/<%= ruta %>'
-        })
+        window.location = '/<%= ruta %>'
+      })
     </script>
     <% } %>
 </body>

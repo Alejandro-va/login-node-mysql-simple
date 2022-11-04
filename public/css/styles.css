@@ -7,10 +7,16 @@ body {
 }
 
 /************************************** 
-* FORMULARIO
+* INDEX
 **************************************/
-.login-form,
-.contenedor {
+
+.content {
+  margin: 0 auto;
+}
+/************************************** 
+* FORMULARIO LOGIN
+**************************************/
+.login-form {
   width: 300px;
   margin: 0 auto;
 }
@@ -32,13 +38,13 @@ body {
 }
 
 /************************************** 
-* BOTONES DEL FORMULARIO
+* BOTONES DEL FORMULARIO LOGIN
 **************************************/
 
 .btn-login {
   width: 100%;
   padding: 15px;
-  background-color: #6f42c1;
+  background-color: #257be4;
   border: 0;
   box-sizing: border-box;
   cursor: pointer;
@@ -47,15 +53,9 @@ body {
   color: #fdfdfd;
 }
 
-.btn-login:hover,
-.btn-login:active {
+.btn-login:hover {
   color: #fdfdfd;
-  background-color: #61428f;
-  border-color: #61428f;
-}
-
-.btn-login:focus {
-  box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
+  background-color: #1b7bce;
 }
 
 .btn-register {
@@ -75,19 +75,15 @@ body {
   text-decoration: none;
 }
 
-.btn-register:hover,
-.btn-register:active {
+.btn-register:hover {
   color: #fdfdfd;
   background-color: #10b981;
   border-color: #10b981;
 }
 
-.btn-register:focus {
-  box-shadow: 0 0 0 3px rgba(149, 195, 158, 0.01);
-}
-
-/*REGISTER*/
-
+/************************************** 
+* REGISTER
+**************************************/
 .register-form {
   width: 400px;
   margin: 0 auto;
@@ -96,13 +92,22 @@ body {
   text-align: center;
   box-shadow: 0 19px 38px rgba(206, 215, 214, 0.495),
     0 15px 12px rgba(158, 157, 148, 0.22);
-  /* border: 1px solid red; */
+  /* border: 1px solid whitesmoke; */
+  border-top: 0.5px solid #ced4da;
+  border-radius: 05px;
 }
 
 label {
   display: block;
   padding: 10px;
+  float: left;
 }
+
+#contenedor-btn-reg {
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn-save {
   width: 48%;
   padding: 15px;
@@ -115,15 +120,9 @@ label {
   color: #fdfdfd;
 }
 
-.btn-save:hover,
-.btn-save:active {
+.btn-save:hover {
   color: #fdfdfd;
   background-color: #1b7bce;
-  border-color: #1b7bce;
-}
-
-.btn-save:focus {
-  box-shadow: 0 0 0 3px rgba(149, 195, 158, 0.01);
 }
 
 .btn-cancel {
@@ -143,15 +142,10 @@ label {
   text-decoration: none;
 }
 
-.btn-cancel:hover,
-.btn-cancel:active {
+.btn-cancel:hover {
   color: #fdfdfd;
   background-color: #d35757;
   border-color: #d35757;
-}
-
-.btn-cancel:focus {
-  box-shadow: 0 0 0 3px rgba(149, 195, 158, 0.01);
 }
 
 .select-css {
@@ -165,6 +159,7 @@ label {
   border: 0;
   box-sizing: border-box;
   background-color: #fdfdfd;
+  margin-bottom: 0.8rem;
 }
 
 .select-css::-ms-expand {
@@ -185,4 +180,29 @@ label {
 
 .select-css option {
   font-weight: normal;
+}
+
+.a-login {
+  background-color: #257be4;
+}
+
+.a-logout {
+  background-color: #d35757;
+}
+
+.a-logout,
+.a-login {
+  width: 9rem;
+  padding: 15px;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: large;
+  color: #fdfdfd;
+
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
 }

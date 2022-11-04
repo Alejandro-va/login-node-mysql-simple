@@ -5,20 +5,37 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Login</title>
   <link rel="stylesheet" href="./resource/css/styles.css">
 </head>
 
 <body>
   <div class="login-form">
-    <h1>login con Node JS</h1>
-    <form action="auth" method="POST">
-      <input type="text" name="nameUser" id="idUser" placeholder="User" required>
-      <input type="text" name="namePassword" id="idPassword" placeholder="Password" required>
+    <h1>Ejs-NodeJS-Mysql</h1>
+    <h2>Login</h2>
+    <form action="/auth" method="POST">
+      <input type="text" name="nameUser" id="idUser" placeholder="User">
+      <input type="text" name="namePassword" id="idPassword" placeholder="Password">
       <input type="submit" class="btn-login" value="Login">
     </form>
     <a href="register" class="btn-register">Register</a>
   </div>
+
+  <!-- SweetAlert2, CDN-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <% if(typeof alert !="undefined" ){ %>
+    <script>
+      Swal.fire({
+        title: '<%= alertTitle %>',
+        text: '<%= alertMessage %>',
+        icon: '<%= alertIcon %>',
+        showConfirmButton: '<%= showConfirmButton %>',
+        timer: '<%= timer %>'
+      }).then(() => {
+        window.location = '/<%= ruta %>'
+      })
+    </script>
+    <% } %>
 </body>
 
 </html>
